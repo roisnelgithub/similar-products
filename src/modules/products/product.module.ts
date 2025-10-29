@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ISimilarProductsService } from './application/ports/output/similar-products.service';
 import { IProductService } from './application/ports/output/product.service';
 import { IGetSimilarProductsUseCase } from './application/ports/input/get-similar-products.use-case';
-import { GetSimilarProductsUseCaseImpl } from './application/use-cases/get-similar-products.impl';
+import { GetSimilarProductsUseCaseImpl } from './application/use-cases/get-similar-products.use-case.impl';
 import { HttpSimilarProductsServiceAdapter } from './infrastructure/adapters/output/http/http-similar-products-service.adapter';
 import { HttpProductServiceAdapter } from './infrastructure/adapters/output/http/http-product-service.adapter';
 import { ProductSimilarController } from './infrastructure/adapters/input/http/product.controller';
