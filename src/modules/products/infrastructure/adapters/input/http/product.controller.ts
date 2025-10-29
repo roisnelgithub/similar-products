@@ -10,9 +10,10 @@ import {
   ValidationPipe
 } from "@nestjs/common";
 
-import { GetSimilarParamsDto, SimilarProductsResponseDto } from "./dtos/product-similar.dto";
+import { GetSimilarParamsDto, ProductDetailDto, SimilarProductsResponseDto } from "./dtos/product-similar.dto";
 import { IGetSimilarProductsUseCase } from "src/modules/products/application/ports/input/get-similar-products.use-case";
-
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+@ApiTags('products')
 @Controller('product')
 export class ProductSimilarController {
   constructor(
@@ -23,6 +24,11 @@ export class ProductSimilarController {
   @Get(':productId/similar')
   @HttpCode(200)
   @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
+  @ApiOperation({ summary: 'Obtiene productos similares por productId' })
+  @ApiParam({ name: 'productId', description: 'ID del producto a consultar', example: '1' })
+  @ApiResponse({ status: 200, description: 'Lista de productos similares', type: [ProductDetailDto] })
+  @ApiResponse({ status: 400, description: 'productId es requerido' })
+  @ApiResponse({ status: 404, description: 'Producto no encontrado' })
   async getSimilar(
     @Param() params: GetSimilarParamsDto,
   ): Promise<SimilarProductsResponseDto> {
