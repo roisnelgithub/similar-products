@@ -6,15 +6,16 @@ import { GetSimilarProductsUseCaseImpl } from './application/use-cases/get-simil
 import { HttpSimilarProductsServiceAdapter } from './infrastructure/adapters/output/http/http-similar-products-service.adapter';
 import { HttpProductServiceAdapter } from './infrastructure/adapters/output/http/http-product-service.adapter';
 import { ProductSimilarController } from './infrastructure/adapters/input/http/product.controller';
+import { ProductServiceUrlProvider } from 'src/config/provider';
 
 @Module({
   imports: [],
   controllers: [ProductSimilarController],
   providers: [
     { provide: IGetSimilarProductsUseCase, useClass: GetSimilarProductsUseCaseImpl },
-
     { provide: ISimilarProductsService, useClass: HttpSimilarProductsServiceAdapter },
     { provide: IProductService, useClass: HttpProductServiceAdapter },
+    ProductServiceUrlProvider,
   ],
   exports: [IGetSimilarProductsUseCase],
 })

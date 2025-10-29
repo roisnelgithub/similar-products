@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { Inject, Injectable } from '@nestjs/common';
+
+import { PRODUCT_SERVICE_URL } from 'src/config/provider';
 import { ISimilarProductsService } from 'src/modules/products/application/ports/output/similar-products.service';
 
 @Injectable()
 export class HttpSimilarProductsServiceAdapter implements ISimilarProductsService {
-  private readonly baseUrl = 'http://localhost:3001';
+  constructor(@Inject(PRODUCT_SERVICE_URL) private readonly baseUrl: string) { }
 
   async getSimilarIds(productId: string): Promise<string[] | null> {
     try {

@@ -23,6 +23,14 @@ docker-compose up -d
 ```
 > **Nota:** Levantar los mocks de Docker (debes clonar o descargar el repositorio con los mocks)
 
+#### Configuración de variables de entorno
+
+En el archivo `.env` en la raíz del proyecto:
+
+```env
+PRODUCT_SERVICE_URL=http://localhost:3001
+```
+
 
 
 #### Levantar la aplicación NestJS
