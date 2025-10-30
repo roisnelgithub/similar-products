@@ -24,11 +24,11 @@ export class ProductSimilarController {
   @Get(':productId/similar')
   @HttpCode(200)
   @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
-  @ApiOperation({ summary: 'Obtiene productos similares por productId' })
-  @ApiParam({ name: 'productId', description: 'ID del producto a consultar', example: '1' })
-  @ApiResponse({ status: 200, description: 'Lista de productos similares', type: [ProductDetailDto] })
-  @ApiResponse({ status: 400, description: 'productId es requerido' })
-  @ApiResponse({ status: 404, description: 'Producto no encontrado' })
+  @ApiOperation({ summary: 'Get similar products by productId' })
+  @ApiParam({ name: 'productId', description: 'ID of the product to query', example: '1' })
+  @ApiResponse({ status: 200, description: 'List of similar products', type: [ProductDetailDto] })
+  @ApiResponse({ status: 400, description: 'productId is required' })
+  @ApiResponse({ status: 404, description: 'Product not found' })
   async getSimilar(
     @Param() params: GetSimilarParamsDto,
   ): Promise<SimilarProductsResponseDto> {
