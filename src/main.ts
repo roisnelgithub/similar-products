@@ -8,7 +8,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Similar Products API')
-    .setDescription('API para obtener productos similares a un producto dado')
+    .setDescription('API to retrieve products similar to a given product')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
