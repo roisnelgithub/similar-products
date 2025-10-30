@@ -20,10 +20,16 @@ export class GetSimilarProductsUseCaseImpl implements IGetSimilarProductsUseCase
     if (ids === null) {
       throw new ProductNotFoundError(productId);
     }
-    const productsRaw = await Promise.all(ids.map(id => this.productClient.getProductById(id)));
 
-    const productsDto = productsRaw
-      .filter((raw): raw is NonNullable<typeof raw> => raw !== null)
+    const settled = await Promise.allSettled(
+      ids.map(id => this.productClient.getProductById(id))
+    );
+    const successfulRaw = settled
+      .filter(r => r.status === 'fulfilled')
+      .map((r: PromiseFulfilledResult<any>) => r.value)
+      .filter(raw => raw !== null);
+
+    const productsDto = successfulRaw
       .map(raw => ProductMapper.toResponseDto(ProductMapper.toDomain(raw)));
 
     return productsDto;
